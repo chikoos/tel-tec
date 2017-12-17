@@ -5,8 +5,16 @@ Full stack followed is as below -
     Web Layer - Nginx (webserver on port 80 in a VM created by Vagrant in Google Cloud Platform (GCP))
     DB  Layer - Mongo DB (NOSQL database running in a container (port 27017) in a VM (port 32769) in GCP)
     API Layer - Spring Boot microservice (running in a container (port 8080) in a VM (port 32770) in GCP)
+    
+VM details (in GCP) are as below.
 
-This repository contains following files -
+    Name	            Zone		        Internal IP	    External IP	
+    rest-api	australia-southeast1-a		10.152.0.2          35.201.0.239 
+    webserver	australia-southeast1-a		10.152.0.3          35.189.41.162 	
+
+Please access following URL for a quick demo - http://35.189.41.162/
+
+The detailed description of files in this repository is as below -
 
 <b>Vagrantfile</b> - This file is configured to create a virtual machine (named webserver) on google cloud platform (GCP). '<b>vagrant up --provider=google</b>' command is required to be executed for the virtual machine. This file is configured for installation of softwares - git and ansible by shell provisioner. Ansible provisioner is also configured and playbook webserver.yml file is executed to install nginx web server. Ansible playbook also contains the tasks for copying and renaming the index.html under webroot directory (/var/www/html).
 
