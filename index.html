@@ -10,7 +10,7 @@
 						process(arr);
 					}
 				};
-				xmlhttp.open("GET", "http://localhost:8080/people", true);
+				xmlhttp.open("GET", "http://35.201.0.239:32770/people", true);
 				xmlhttp.send();
 			}
 			
@@ -18,7 +18,7 @@
 				var out = '<ul>';
 				var i;
 				for(i = 0; i < arr.length; i++) {
-					out += '<li><b><a href="http://localhost:8080/people/' + arr[i].firstname + '">' + arr[i].firstname + '</a></b></li>';
+					out += '<li><b><a href="http://35.201.0.239:32770/people/' + arr[i].firstname + '">' + arr[i].firstname + '</a></b></li>';
 				}
 				out += '</ul>';
 				document.getElementById("data").innerHTML = out;
@@ -31,7 +31,7 @@
 					}
 				};
 				var body = JSON.stringify({"firstname":document.getElementById('firstname').value,"lastname":document.getElementById('lastname').value,"company":document.getElementById('company').value,"role":document.getElementById('role').value});
-				xhttp.open("POST", "http://localhost:8080/people", true);
+				xhttp.open("POST", "http://35.201.0.239:32770/people", true);
 				xhttp.setRequestHeader("Content-type", "application/json");
 				xhttp.send(body);
 				reset();
