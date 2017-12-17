@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<title>Telstra</title>
+		<script type="text/javascript">
+			function retrieve() {
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						var arr = JSON.parse(this.responseText);
+						process(arr);
+					}
+				};
+				xmlhttp.open("GET", "http://localhost:8080/people", true);
+				xmlhttp.send();
+			}
+			
+			function process(arr) {
+				var out = '<ul>';
+				var i;
+				for(i = 0; i < arr.length; i++) {
+					out += '<li><b><a href="http://localhost:8080/people/' + arr[i].firstname + '">' + arr[i].firstname + '</a></b></li>';
+				}
+				out += '</ul>';
+				document.getElementById("data").innerHTML = out;
+			}
+			
+			function save() {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+					}
+				};
+				var body = JSON.stringify({"firstname":document.getElementById('firstname').value,"lastname":document.getElementById('lastname').value,"company":document.getElementById('company').value,"role":document.getElementById('role').value});
+				xhttp.open("POST", "http://localhost:8080/people", true);
+				xhttp.setRequestHeader("Content-type", "application/json");
+				xhttp.send(body);
+				reset();
+				retrieve();
+			}
+			
+			function reset() {
+				document.getElementById('firstname').value = "";
+				document.getElementById('lastname').value = "";
+				document.getElementById('company').value = "";
+				document.getElementById('role').value = "";
+				return;
+			}
+		</script>
+	</head>
+	
+	<body onload="retrieve()">
+		<form>
+			<table>
+				<tr colspan=4>
+					<td>
+						<label for="firstname"><b>First Name</b></label>
+					</td>
+					<td>
+						<input type="text" id="firstname"></input>
+					</td>
+					<td>
+						<label for="lastname"><b>Last Name</b></label>
+					</td>
+					<td>
+						<input type="text" id="lastname"></input>
+					</td>
+				</tr>
+				<tr colspan=4>
+					<td>
+						<label for="company"><b>Company</b></label>
+					</td>
+					<td>
+						<input type="text" id="company"></input>
+					</td>
+					<td>
+						<label for="role"><b>Role</b></label>
+					</td>
+					<td>
+						<input type="text" id="role"></input>
+					</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td></td>
+					<td style="align:center">
+						<input type="button" value="Save" onClick="save()"/>
+					</td>
+				</tr>
+			</table>
+			<div id="msg"></div>
+			<h3>People:</h3>
+			<div id="data"></div>
+		</form
+	</body>
+</html>
