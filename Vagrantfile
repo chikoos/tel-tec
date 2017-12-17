@@ -64,6 +64,7 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+     apt-get install git -y
      apt-get install ansible -y
   SHELL
   # Ansible provisioner for installing nginx.
