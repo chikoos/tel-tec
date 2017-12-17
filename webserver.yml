@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  user: ansible
   become: true
   connection: ssh
   gather_facts: no
