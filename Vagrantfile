@@ -12,7 +12,18 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "centos/7"
+  config.vm.box = "gce"
+  
+  config.vm.provider :google do |google|
+    google.google_project_id = "teltt"
+	  google.google_client_email = "757261274043-compute@developer.gserviceaccount.com"
+    # json file not checked in for security reasons.
+    google.google_json_key_location = "teltt-4ebc8aaeed32.json"
+    google.name = "webserver"
+    google.zone = "australia-southeast1-a"
+    google.machine_type = "n1-standard-1"
+    google.image = "debian-9-stretch-v20171213"
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -49,17 +60,16 @@ Vagrant.configure("2") do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  config.vm.provider "virtualbox" do |vb|
+  # config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
-      vb.gui = true
+  #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
-  end
+  # end
   #
   # View the documentation for the provider you are using for more
-  # information on available options.
-
+  # information on available options
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
@@ -67,7 +77,7 @@ Vagrant.configure("2") do |config|
      apt-get install git -y
      apt-get install ansible -y
   SHELL
-  # Ansible provisioner for installing nginx.
+
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "webserver.yml"
   end
