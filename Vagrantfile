@@ -64,8 +64,10 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-     yum install epel-release
-	 yum install nginx -y
-     systemctl start nginx
+     apt-get install ansible -y
   SHELL
+  # Ansible provisioner for installing nginx.
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "webserver.yml"
+  end
 end
