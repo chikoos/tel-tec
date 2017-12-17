@@ -77,5 +77,5 @@ Containers on <b>rest-api</b> machine are as below.
 The rest endpoints exposed are:
 
       GET         http://35.201.0.239:32770/people            Returns list of Person.
-      GET         http://35.201.0.239:32770/people/{name}     Returns Person having either firstname as name or lastname as name.
+      GET         http://35.201.0.239:32770/people/{name}     Returns Person having either firstname or lastname as name.
       POST        http://35.201.0.239:32770/people            Saves Person in the request body in mongo database.
