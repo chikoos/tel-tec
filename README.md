@@ -10,9 +10,9 @@ VM details (in GCP) are as below.
 
     Name	            Zone		        Internal IP	    External IP	
     rest-api	australia-southeast1-a		10.152.0.2          35.201.0.239 
-    webserver	australia-southeast1-a		10.152.0.3          35.189.41.162 	
+    webserver	australia-southeast1-a		10.152.0.3          35.201.1.201	
 
-Please access following URL for a quick demo - http://35.189.41.162/
+Please access following URL for a quick demo - http://35.201.1.201/
 
 The detailed description of files in this repository is as below -
 
