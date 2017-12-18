@@ -25,17 +25,40 @@
 			}
 			
 			function save() {
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-					}
-				};
-				var body = JSON.stringify({"firstname":document.getElementById('firstname').value,"lastname":document.getElementById('lastname').value,"company":document.getElementById('company').value,"role":document.getElementById('role').value});
-				xhttp.open("POST", "http://35.201.0.239:32770/people", true);
-				xhttp.setRequestHeader("Content-type", "application/json");
-				xhttp.send(body);
-				reset();
-				retrieve();
+				var msg = validate();
+				if (msg=="") {
+					var xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							reset();
+							retrieve();
+						}
+					};
+					var body = JSON.stringify({"firstname":document.getElementById('firstname').value,"lastname":document.getElementById('lastname').value,"company":document.getElementById('company').value,"role":document.getElementById('role').value});
+					xhttp.open("POST", "http://35.201.0.239:32770/people", true);
+					xhttp.setRequestHeader("Content-type", "application/json");
+					xhttp.send(body);
+				} else {
+					alert(msg);
+					return;
+				}	
+			}
+			
+			function validate() {
+				var msg = "";
+				if (document.getElementById('firstname').value=="") {
+					msg += "Please enter first name" + "\n";	
+				}
+				if (document.getElementById('lastname').value=="") {
+					msg += "Please enter last name" + "\n";
+				}
+				if (document.getElementById('company').value=="") {
+					msg += "Please enter company name" + "\n";
+				} 
+				if (document.getElementById('role').value=="") {
+					msg += "Please enter role" + "\n";
+				} 
+				return msg;
 			}
 			
 			function reset() {
